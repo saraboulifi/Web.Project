@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum - PeaceConnect</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/forum.css">
+    
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <a href="index.html" class="navbar-brand">
+                    <span>🕊️</span>
+                    <span>PeaceConnect</span>
+                </a>
+                <button class="navbar-toggle" aria-label="Menu">☰</button>
+                <ul class="navbar-menu">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="forum.html" class="active">Forum</a></li>
+                    <li><a href="events.html">Événements</a></li>
+                    <li><a href="help-request.html">Demander de l'aide</a></li>
+                    <li><a href="profile.html">Mon Profil</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Forum Section -->
+    <section class="section forum-section">
+        <div class="container">
+            <!-- Header du Forum -->
+            <div class="forum-header">
+                <div class="forum-header-content">
+                    <h1><i class="fas fa-comments"></i> Forum de la communauté</h1>
+                    <p class="forum-subtitle">Partagez vos expériences, posez des questions et échangez avec la communauté</p>
+                </div>
+                <button class="btn btn-primary btn-lg" data-modal="createPostModal">
+                    <i class="fas fa-plus"></i> Créer une publication
+                </button>
+            </div>
+
+            <!-- Barre de recherche et filtres -->
+            <div class="forum-filters">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" class="form-control" placeholder="Rechercher par mots-clés, tags, auteur..." data-filter=".forum-post">
+                </div>
+                <div class="filter-controls">
+                <div class="filter-group">
+                    <label class="form-label">Catégorie</label>
+                        <select id="categoryFilter" class="form-control">
+                        <option value="">Toutes les catégories</option>
+                            <option value="soutien">Soutien</option>
+                        <option value="experience">Expériences</option>
+                            <option value="conseils">Conseils</option>
+                        <option value="discussion">Discussion</option>
+                            <option value="question">Question</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="form-label">Trier par</label>
+                        <select id="sortFilter" class="form-control">
+                        <option value="recent">Plus récent</option>
+                        <option value="popular">Plus populaire</option>
+                        <option value="comments">Plus de commentaires</option>
+                            <option value="likes">Plus de likes</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="form-label">Tags</label>
+                        <select id="tagFilter" class="form-control">
+                            <option value="">Tous les tags</option>
+                            <option value="paix">Paix</option>
+                            <option value="inclusion">Inclusion</option>
+                            <option value="droits">Droits</option>
+                            <option value="violence">Violence</option>
+                            <option value="discrimination">Discrimination</option>
+                            <option value="soutien">Soutien</option>
+                            <option value="harcèlement">Harcèlement</option>
+                            <option value="médiation">Médiation</option>
+                    </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tags populaires -->
+            <div class="popular-tags">
+                <h3><i class="fas fa-tags"></i> Tags populaires :</h3>
+                <div class="tags-list">
+                    <span class="tag tag-primary" data-tag="paix">#paix</span>
+                    <span class="tag tag-primary" data-tag="inclusion">#inclusion</span>
+                    <span class="tag tag-secondary" data-tag="droits">#droits</span>
+                    <span class="tag tag-primary" data-tag="violence">#violence</span>
+                    <span class="tag tag-primary" data-tag="discrimination">#discrimination</span>
+                    <span class="tag tag-secondary" data-tag="soutien">#soutien</span>
+                    <span class="tag tag-primary" data-tag="harcèlement">#harcèlement</span>
+                    <span class="tag tag-secondary" data-tag="médiation">#médiation</span>
+                </div>
+            </div>
+
+            <!-- Vue liste des posts -->
+            <div id="forumPosts" class="forum-posts-list">
+                <!-- Post 1 -->
+                <article class="card forum-post" data-category="soutien" data-tags="soutien,discrimination">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="author-avatar" style="background: linear-gradient(135deg, #1e3a8a, #16a34a);">SM</div>
+                            <div class="author-info">
+                                <strong class="author-name">Sophie Martin</strong>
+                                <span class="post-date"><i class="far fa-clock"></i> Il y a 2 heures</span>
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <button class="btn-icon" data-action="report" data-post-id="1" title="Signaler">
+                                <i class="fas fa-flag"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-tags">
+                            <span class="tag tag-primary">#soutien</span>
+                            <span class="tag tag-primary">#discrimination</span>
+                        </div>
+                        <h2 class="post-title">
+                            <a href="#" class="post-link" data-post-id="1">Besoin de conseils pour signaler un incident</a>
+                        </h2>
+                        <p class="post-excerpt">Bonjour à tous, j'ai été témoin d'un incident de discrimination hier et je ne sais pas comment procéder pour le signaler. Quelqu'un a-t-il déjà vécu une situation similaire ? Merci pour votre aide.</p>
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-stats">
+                            <button class="post-action-btn like-btn" data-post-id="1" data-liked="false">
+                                <i class="far fa-thumbs-up"></i>
+                                <span class="count">12</span>
+                            </button>
+                            <button class="post-action-btn support-btn" data-post-id="1" data-supported="false">
+                                <i class="far fa-heart"></i>
+                                <span class="count">8</span>
+                            </button>
+                            <button class="post-action-btn comments-btn" data-post-id="1">
+                                <i class="far fa-comments"></i>
+                                <span class="count">5</span>
+                            </button>
+                        </div>
+                        <div class="post-meta">
+                            <span class="post-category">Soutien</span>
+                            <button class="btn-link share-btn" data-post-id="1">
+                                <i class="fas fa-share-alt"></i> Partager
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="card forum-post" data-category="experience" data-tags="médiation,expérience">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="author-avatar" style="background: linear-gradient(135deg, #16a34a, #1e3a8a);">JD</div>
+                            <div class="author-info">
+                                <strong class="author-name">Jean Dubois</strong>
+                                <span class="post-date"><i class="far fa-clock"></i> Il y a 5 heures</span>
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <button class="btn-icon" data-action="report" data-post-id="2" title="Signaler">
+                                <i class="fas fa-flag"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-tags">
+                            <span class="tag tag-secondary">#médiation</span>
+                            <span class="tag tag-secondary">#expérience</span>
+                        </div>
+                        <h2 class="post-title">
+                            <a href="#" class="post-link" data-post-id="2">Mon expérience avec la médiation communautaire</a>
+                        </h2>
+                        <p class="post-excerpt">Je voulais partager mon expérience positive avec le service de médiation de PeaceConnect. Après un conflit avec mon voisinage, j'ai utilisé la plateforme et j'ai reçu un accompagnement exceptionnel. La médiation a permis de résoudre le problème de manière pacifique.</p>
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-stats">
+                            <button class="post-action-btn like-btn" data-post-id="2" data-liked="true">
+                                <i class="fas fa-thumbs-up"></i>
+                                <span class="count">28</span>
+                            </button>
+                            <button class="post-action-btn support-btn" data-post-id="2" data-supported="false">
+                                <i class="far fa-heart"></i>
+                                <span class="count">15</span>
+                            </button>
+                            <button class="post-action-btn comments-btn" data-post-id="2">
+                                <i class="far fa-comments"></i>
+                                <span class="count">8</span>
+                            </button>
+                        </div>
+                        <div class="post-meta">
+                            <span class="post-category">Expériences</span>
+                            <button class="btn-link share-btn" data-post-id="2">
+                                <i class="fas fa-share-alt"></i> Partager
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="card forum-post" data-category="conseils" data-tags="harcèlement,conseils">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="author-avatar" style="background: linear-gradient(135deg, #1e3a8a, #16a34a);">AM</div>
+                            <div class="author-info">
+                                <strong class="author-name">Amélie Moreau</strong>
+                                <span class="post-date"><i class="far fa-clock"></i> Il y a 1 jour</span>
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <button class="btn-icon" data-action="report" data-post-id="3" title="Signaler">
+                                <i class="fas fa-flag"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-tags">
+                            <span class="tag tag-primary">#harcèlement</span>
+                            <span class="tag tag-secondary">#conseils</span>
+                        </div>
+                        <h2 class="post-title">
+                            <a href="#" class="post-link" data-post-id="3">Ressources pour lutter contre le harcèlement</a>
+                        </h2>
+                        <p class="post-excerpt">Je partage une liste de ressources utiles pour ceux qui font face au harcèlement : numéros d'urgence, associations d'aide, guides pratiques. N'hésitez pas à ajouter vos propres ressources !</p>
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-stats">
+                            <button class="post-action-btn like-btn" data-post-id="3" data-liked="false">
+                                <i class="far fa-thumbs-up"></i>
+                                <span class="count">45</span>
+                            </button>
+                            <button class="post-action-btn support-btn" data-post-id="3" data-supported="true">
+                                <i class="fas fa-heart"></i>
+                                <span class="count">32</span>
+                            </button>
+                            <button class="post-action-btn comments-btn" data-post-id="3">
+                                <i class="far fa-comments"></i>
+                                <span class="count">15</span>
+                            </button>
+                        </div>
+                        <div class="post-meta">
+                            <span class="post-category">Conseils</span>
+                            <button class="btn-link share-btn" data-post-id="3">
+                                <i class="fas fa-share-alt"></i> Partager
+                            </button>
+                    </div>
+                </div>
+                </article>
+
+                <!-- Post 4 -->
+                <article class="card forum-post" data-category="discussion" data-tags="inclusion,paix">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="author-avatar" style="background: linear-gradient(135deg, #16a34a, #1e3a8a);">PL</div>
+                            <div class="author-info">
+                                <strong class="author-name">Pierre Laurent</strong>
+                                <span class="post-date"><i class="far fa-clock"></i> Il y a 2 jours</span>
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <button class="btn-icon" data-action="report" data-post-id="4" title="Signaler">
+                                <i class="fas fa-flag"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-tags">
+                            <span class="tag tag-primary">#inclusion</span>
+                            <span class="tag tag-secondary">#paix</span>
+                        </div>
+                        <h2 class="post-title">
+                            <a href="#" class="post-link" data-post-id="4">Comment promouvoir l'inclusion dans notre quartier ?</a>
+                        </h2>
+                        <p class="post-excerpt">Discussion ouverte : quelles actions concrètes pouvons-nous mettre en place pour favoriser l'inclusion et la diversité dans nos communautés locales ? Partagez vos idées et expériences !</p>
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-stats">
+                            <button class="post-action-btn like-btn" data-post-id="4" data-liked="false">
+                                <i class="far fa-thumbs-up"></i>
+                                <span class="count">67</span>
+                            </button>
+                            <button class="post-action-btn support-btn" data-post-id="4" data-supported="false">
+                                <i class="far fa-heart"></i>
+                                <span class="count">42</span>
+                            </button>
+                            <button class="post-action-btn comments-btn" data-post-id="4">
+                                <i class="far fa-comments"></i>
+                                <span class="count">23</span>
+                            </button>
+                        </div>
+                        <div class="post-meta">
+                            <span class="post-category">Discussion</span>
+                            <button class="btn-link share-btn" data-post-id="4">
+                                <i class="fas fa-share-alt"></i> Partager
+                            </button>
+                    </div>
+                </div>
+                </article>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="pagination-btn" disabled>
+                    <i class="fas fa-chevron-left"></i> Précédent
+                </button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <button class="pagination-btn">Suivant <i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modale: Créer un post -->
+    <div id="createPostModal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fas fa-edit"></i> Créer une nouvelle publication</h2>
+                <button class="modal-close" data-close-modal>&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="createPostForm">
+                    <div class="form-group">
+                        <label for="postTitle" class="form-label">Titre *</label>
+                        <input type="text" id="postTitle" class="form-control" required placeholder="Donnez un titre à votre publication">
+                    </div>
+                    <div class="form-group">
+                        <label for="postCategory" class="form-label">Catégorie *</label>
+                        <select id="postCategory" class="form-control" required>
+                            <option value="">Sélectionner une catégorie...</option>
+                            <option value="soutien">Soutien</option>
+                            <option value="experience">Expériences</option>
+                            <option value="conseils">Conseils</option>
+                            <option value="discussion">Discussion</option>
+                            <option value="question">Question</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="postContent" class="form-label">Contenu *</label>
+                        <textarea id="postContent" class="form-control" rows="8" required placeholder="Rédigez votre message... Partagez vos expériences, posez vos questions ou donnez des conseils."></textarea>
+                        <div class="form-help">Vous pouvez utiliser des balises HTML pour formater votre texte</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tags</label>
+                        <div class="tags-selector">
+                            <span class="tag tag-primary selectable" data-tag="paix">#paix</span>
+                            <span class="tag tag-primary selectable" data-tag="inclusion">#inclusion</span>
+                            <span class="tag tag-secondary selectable" data-tag="droits">#droits</span>
+                            <span class="tag tag-primary selectable" data-tag="violence">#violence</span>
+                            <span class="tag tag-primary selectable" data-tag="discrimination">#discrimination</span>
+                            <span class="tag tag-secondary selectable" data-tag="soutien">#soutien</span>
+                            <span class="tag tag-primary selectable" data-tag="harcèlement">#harcèlement</span>
+                            <span class="tag tag-secondary selectable" data-tag="médiation">#médiation</span>
+                        </div>
+                        <input type="hidden" id="selectedTags" value="">
+                        <div class="form-help">Cliquez sur les tags pour les sélectionner</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" data-close-modal>Annuler</button>
+                <button type="submit" form="createPostForm" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> Publier
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale: Vue détaillée d'un post avec commentaires -->
+    <div id="postDetailModal" class="modal">
+        <div class="modal-content modal-extra-large">
+            <div class="modal-header">
+                <h2 class="modal-title" id="postDetailTitle"></h2>
+                <button class="modal-close" data-close-modal>&times;</button>
+            </div>
+            <div class="modal-body post-detail-body">
+                <!-- Contenu du post sera injecté ici par JavaScript -->
+                <div id="postDetailContent"></div>
+                
+                <!-- Section commentaires -->
+                <div class="comments-section">
+                    <h3 class="comments-title">
+                        <i class="fas fa-comments"></i> Commentaires (<span id="commentsCount">0</span>)
+                    </h3>
+                    
+                    <!-- Formulaire de commentaire -->
+                    <div class="comment-form-container">
+                        <div class="comment-form-header">
+                            <div class="author-avatar" style="background: linear-gradient(135deg, #1e3a8a, #16a34a);">MOI</div>
+                            <strong>Ajouter un commentaire</strong>
+                        </div>
+                        <form id="commentForm" class="comment-form">
+                            <textarea id="commentText" class="form-control" rows="4" placeholder="Écrivez votre commentaire..." required></textarea>
+                            <div class="comment-form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane"></i> Publier le commentaire
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Liste des commentaires -->
+                    <div id="commentsList" class="comments-list">
+                        <!-- Les commentaires seront injectés ici par JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale: Modifier un post -->
+    <div id="editPostModal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fas fa-edit"></i> Modifier la publication</h2>
+                <button class="modal-close" data-close-modal>&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editPostForm">
+                    <input type="hidden" id="editPostId" value="">
+                    <div class="form-group">
+                        <label for="editPostTitle" class="form-label">Titre *</label>
+                        <input type="text" id="editPostTitle" class="form-control" required placeholder="Titre de votre post">
+                    </div>
+                    <div class="form-group">
+                        <label for="editPostCategory" class="form-label">Catégorie *</label>
+                        <select id="editPostCategory" class="form-control" required>
+                            <option value="">Sélectionner une catégorie...</option>
+                            <option value="soutien">Soutien</option>
+                            <option value="experience">Expériences</option>
+                            <option value="conseils">Conseils</option>
+                            <option value="discussion">Discussion</option>
+                            <option value="question">Question</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPostContent" class="form-label">Contenu *</label>
+                        <textarea id="editPostContent" class="form-control" rows="8" required placeholder="Rédigez votre message..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tags</label>
+                        <div class="tags-selector">
+                            <span class="tag tag-primary selectable" data-tag="paix">#paix</span>
+                            <span class="tag tag-primary selectable" data-tag="inclusion">#inclusion</span>
+                            <span class="tag tag-secondary selectable" data-tag="droits">#droits</span>
+                            <span class="tag tag-primary selectable" data-tag="violence">#violence</span>
+                            <span class="tag tag-primary selectable" data-tag="discrimination">#discrimination</span>
+                            <span class="tag tag-secondary selectable" data-tag="soutien">#soutien</span>
+                            <span class="tag tag-primary selectable" data-tag="harcèlement">#harcèlement</span>
+                            <span class="tag tag-secondary selectable" data-tag="médiation">#médiation</span>
+                        </div>
+                        <input type="hidden" id="editSelectedTags" value="">
+                        <div class="form-help">Cliquez sur les tags pour les sélectionner</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" data-close-modal>Annuler</button>
+                <button type="submit" form="editPostForm" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Enregistrer les modifications
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale: Signaler un contenu -->
+    <div id="reportModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fas fa-flag"></i> Signaler un contenu</h2>
+                <button class="modal-close" data-close-modal>&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="reportForm">
+                    <input type="hidden" id="reportPostId" value="">
+                    <div class="form-group">
+                        <label class="form-label">Raison du signalement *</label>
+                        <div class="form-check">
+                            <input type="radio" id="report1" name="reportReason" value="inappropriate" required>
+                            <label for="report1" class="form-check-label">Contenu inapproprié</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" id="report2" name="reportReason" value="spam" required>
+                            <label for="report2" class="form-check-label">Spam</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" id="report3" name="reportReason" value="harassment" required>
+                            <label for="report3" class="form-check-label">Harcèlement</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" id="report4" name="reportReason" value="violence" required>
+                            <label for="report4" class="form-check-label">Violence ou menaces</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" id="report5" name="reportReason" value="other" required>
+                            <label for="report5" class="form-check-label">Autre</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="reportDescription" class="form-label">Description (optionnel)</label>
+                        <textarea id="reportDescription" class="form-control" rows="4" placeholder="Décrivez brièvement la raison de votre signalement..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" data-close-modal>Annuler</button>
+                <button type="submit" form="reportForm" class="btn btn-primary">
+                    <i class="fas fa-flag"></i> Signaler
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background-color: var(--color-text); color: white; padding: 2rem 0; margin-top: 4rem;">
+        <div class="container">
+            <div style="text-align: center;">
+                <p style="margin-bottom: 1rem;">&copy; 2024 PeaceConnect. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/forum.js"></script>
+</body>
+</html>
